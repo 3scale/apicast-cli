@@ -1,0 +1,4 @@
+#!/usr/bin/env lua
+
+local cmd = require "cmd.actions"
+cmd.execute(arg)
