@@ -1,8 +1,6 @@
 local lfs = require 'lfs'
 
-local _M  = {}
-
-function _M.create_new_project(args, _)
+local create_new_project = function (args, _)
   local opts = args or {}
   local name = string.gsub((opts.name or 'new-app'):lower(), ' ', '_')
   local current_dir = lfs.currentdir()
@@ -15,4 +13,6 @@ function _M.create_new_project(args, _)
   os.exit(0)
 end
 
-return _M
+return {
+  create = create_new_project
+}
