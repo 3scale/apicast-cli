@@ -1,5 +1,6 @@
+local generator = require "apicast-cli.cmd.generator"
 local _M = {
-  generator = {create = function(); end}
+  generator = generator
 }
 
 return _M
