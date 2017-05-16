@@ -21,10 +21,10 @@ dependencies = {
 build = {
   type = "builtin",
   modules = {
-    ['apicast-cli.cmd'] = "apicast-cli/cmd.lua",
-    ['apicast-cli.cmd.generator'] = "apicast-cli/cmd/generator.lua"
+    ['apicast-cli.cmd'] = "src/apicast-cli/cmd.lua",
+    ['apicast-cli.cmd.generator'] = "src/apicast-cli/cmd/generator.lua"
   },
   bin = {
-    ['apicast-cli'] = "bin/apicast-cli"
+    ['apicast-cli'] = "src/bin/apicast-cli"
   }
 }
