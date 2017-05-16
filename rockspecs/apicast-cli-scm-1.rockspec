@@ -15,7 +15,7 @@ dependencies = {
   "lua >= 5.1, < 5.3",
   "argparse",
   "ansicolors",
-  "luafilesystem"
+  "penlight"
 }
 build = {
   type = "builtin",
@@ -23,9 +23,15 @@ build = {
     ['apicast-cli.cmd'] = "src/apicast-cli/cmd.lua",
     ['apicast-cli.cli'] = "src/apicast-cli/cli.lua",
     ['apicast-cli.cmd.generator'] = "src/apicast-cli/cmd/generator.lua",
+    ['apicast-cli.utils.path'] = "src/apicast-cli/utils/path.lua",
     ['apicast-cli.cli.create'] = "src/apicast-cli/cli/create.lua"
   },
-  bin = {
-    ['apicast-cli'] = "src/bin/apicast-cli"
+  install = {
+    lua = {
+      ['apicast-cli.blank-app.readme'] = "src/apicast-cli/blank-app/README.md"
+    },
+    bin = {
+      ['apicast-cli'] = "bin/apicast-cli"
+    }
   }
 }
