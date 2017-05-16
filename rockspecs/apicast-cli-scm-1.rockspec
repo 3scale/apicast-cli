@@ -1,8 +1,7 @@
 package = "apicast-cli"
-version = "0.1-1"
+version = "scm-1"
 source = {
-  -- url = "https://github.com/3scale/apicast-cli"
-  url = "."
+  url = "git://github.com/3scale/apicast-cli"
 }
 description = {
   summary = "A Lua tool to bootstrap [apicast](https://github.com/3scale/apicast) project.",
@@ -22,7 +21,9 @@ build = {
   type = "builtin",
   modules = {
     ['apicast-cli.cmd'] = "src/apicast-cli/cmd.lua",
-    ['apicast-cli.cmd.generator'] = "src/apicast-cli/cmd/generator.lua"
+    ['apicast-cli.cli'] = "src/apicast-cli/cli.lua",
+    ['apicast-cli.cmd.generator'] = "src/apicast-cli/cmd/generator.lua",
+    ['apicast-cli.cli.create'] = "src/apicast-cli/cli/create.lua"
   },
   bin = {
     ['apicast-cli'] = "src/bin/apicast-cli"
