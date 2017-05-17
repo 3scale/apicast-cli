@@ -1,0 +1,11 @@
+{% include "env.conf" %}
+
+events {
+  worker_connections 1024;
+}
+
+http {
+  lua_code_cache {{ lua_code_cache }};
+
+  include server.conf;
+}

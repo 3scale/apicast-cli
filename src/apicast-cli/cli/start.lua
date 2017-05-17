@@ -1,5 +1,6 @@
 local colors = require "ansicolors"
 local Liquid = require 'liquid'
+local configuration = require 'apicast-cli.configuration'
 
 local Lexer = Liquid.Lexer
 local Parser = Liquid.Parser
@@ -41,7 +42,7 @@ local function call(m, parser)
   :action(m.start)
 
   create_cmd:usage(colors("%{bright red}Usage: apicast-cli start [PATH]"))
-  create_cmd:argument("path", "The name of your application.")
+  create_cmd:argument("path", "The name of your application.", 'nginx/main.conf.liquid')
   -- create_cmd:argument("path", "The path to where you wish your app to be created."):default(".")
   create_cmd:epilog(colors([[
       Example: %{bright red} apicast-cli start path/to/template.liquid%{reset}
@@ -52,7 +53,7 @@ end
 local _M = { }
 local mt = { __call = call }
 
-local function render(template)
+local function render(template, config)
   local filesystem = setmetatable({}, {
     __index = function(t, k)
       local dirs = {}
@@ -68,19 +69,21 @@ local function render(template)
   local lexer = Lexer:new(template)
   local parser = Parser:new(lexer)
   local interpreter = Interpreter:new(parser)
+  local context = InterpreterContext:new(setmetatable({ fs = fs }, { __index = config }))
 
-  return interpreter:interpret( InterpreterContext:new({ fs = fs }) )
+  return interpreter:interpret(context)
 end
 
 function _M.start(args)
   local path = args.path
   local attributes = lfs.attributes(path)
+  local context = configuration:load()
 
   if attributes then
     local mode = attributes.mode
 
     if mode == 'file' then
-      local config = render(read(path))
+      local config = render(read(path), context)
 
       print('starting nginx:\n', config)
     else
