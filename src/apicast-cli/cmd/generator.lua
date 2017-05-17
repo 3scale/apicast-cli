@@ -13,6 +13,11 @@ local create_new_project = function (args, _)
   local command = {"cp", "-a", raw_app, new_app}
   print('Generating new project into ' .. new_app)
   assert(os.execute(table.concat(command, " ")))
+  
+  print('Generating rockspec file')
+  local rockspec = {'luarocks', 'write-rockspec', '--output', (name  .. '.rockspec'), '0.1', new_app}
+  assert(os.execute(table.concat(rockspec, " ")))
+
   print('done!')
   os.exit(0)
 end
