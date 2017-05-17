@@ -17,8 +17,8 @@ dependencies = {
   "ansicolors",
   "penlight",
   "luafilesystem",
-  "liquid-lua >= scm-1",
-  "debugger-lua == scm-1",
+  "liquid",
+  "debugger",
 }
 build = {
   type = "builtin",
