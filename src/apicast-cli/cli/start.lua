@@ -1,6 +1,12 @@
 local colors = require "ansicolors"
 local Liquid = require 'liquid'
 local configuration = require 'apicast-cli.configuration'
+local exec = require('apicast-cli.utils.exec')
+
+local pl = {
+  path = require('pl.path'),
+  file = require('pl.file'),
+}
 
 local Lexer = Liquid.Lexer
 local Parser = Liquid.Parser
@@ -84,8 +90,11 @@ function _M.start(args)
 
     if mode == 'file' then
       local config = render(read(path), context)
+      local tmp = pl.path.tmpname()
 
-      print('starting nginx:\n', config)
+      pl.file.write(tmp, config)
+
+      exec('openresty', '-c', tmp)
     else
       say('path %s is not a file but a %s', path, mode)
       os.exit(1)

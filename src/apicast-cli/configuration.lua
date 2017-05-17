@@ -1,12 +1,13 @@
 local pl_path = require('pl.path')
-local tablex = require('pl.tablex')
-inspect = require 'inspect'
 local app = require('apicast-cli.application')
 
 local _M = {
   default_environment = 'production',
   default_config = {
-    lua_code_cache = 'on'
+    lua_code_cache = 'on',
+    master_process = 'off',
+    worker_processes = 1,
+    daemon = 'off',
   }
 }
 
