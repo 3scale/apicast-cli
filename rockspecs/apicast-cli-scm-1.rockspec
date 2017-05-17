@@ -18,6 +18,7 @@ dependencies = {
   "penlight",
   "luafilesystem",
   "liquid-lua >= scm-1",
+  "debugger-lua == scm-1",
 }
 build = {
   type = "builtin",
