@@ -19,6 +19,7 @@ dependencies = {
   "luafilesystem",
   "liquid",
   "debugger",
+  "busted",
 }
 build = {
   type = "builtin",
