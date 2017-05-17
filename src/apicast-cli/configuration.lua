@@ -28,9 +28,10 @@ function _M:load(env)
   print('loading config for: ', environment, ' environment from ', path)
 
   local config = loadfile(path, 't', {})
+  local default_config = self.default_config
 
   if not config then
-    return nil, 'invalid config'
+    return default_config, 'invalid config'
   end
 
   local table = config()
