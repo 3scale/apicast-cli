@@ -1,0 +1,4 @@
+{% for file in fs['spec/fixtures/conf'] %}
+    # include: {{ file }}
+    {% include file %}
+{% endfor %}

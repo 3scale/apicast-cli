@@ -15,7 +15,10 @@ dependencies = {
   "lua >= 5.1, < 5.3",
   "argparse",
   "ansicolors",
-  "penlight"
+  "penlight",
+  "luafilesystem",
+  "liquid-lua >= scm-1",
+  "debugger-lua == scm-1",
 }
 build = {
   type = "builtin",

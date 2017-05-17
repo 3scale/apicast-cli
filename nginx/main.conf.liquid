@@ -1,0 +1,14 @@
+{% include "env.conf" %}
+
+daemon {{ daemon }};
+master_process {{ master_process }};
+worker_processes {{ worker_processes }};
+
+events {
+  worker_connections 1024;
+}
+
+http {
+  lua_code_cache {{ lua_code_cache }};
+
+}

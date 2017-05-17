@@ -1,5 +1,10 @@
 #!/usr/bin/env resty
-
-require('apicast-cli.cli'):call()
-
 -- vim: set ft=lua:
+
+local cli = require('apicast-cli.cli')
+
+if os.getenv('APICAST_DEBUG') == '1' then
+  require('debugger').call(function() cli:call() end)
+else
+  cli:call()
+end
