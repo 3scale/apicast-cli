@@ -8,7 +8,7 @@ local function call(_, parser)
 
   create_cmd:usage(colors("%{bright red}Usage: apicast-cli create NAME [PATH]"))
   create_cmd:argument("name", "The name of your application.")
-  -- create_cmd:argument("path", "The path to where you wish your app to be created."):default(".")
+  create_cmd:argument("path", "The path to where you wish your app to be created."):default(".")
   create_cmd:epilog(colors([[
       Example: %{bright red} apicast-cli create 'hello_world' /var/www %{reset}
         This will create your web app under /var/www/hello_world.]]))
