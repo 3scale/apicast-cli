@@ -29,13 +29,17 @@ function LazyFileSystem:new(template)
   return Lazy:new(filesystem)
 end
 
-function _M:new(config, dir)
+local function noop(...) return ... end
+
+function _M:new(config, dir, strict)
   local instance = setmetatable({}, { __index = self })
+
+  local assert = strict and assert or noop
 
   instance.root = pl.path.abspath(dir or pl.path.currentdir())
 
   instance.filesystem = FileSystem:new(function(path)
-    return instance:read(path)
+    return assert(instance:read(path))
   end)
 
   local fs = LazyFileSystem:new(instance)
