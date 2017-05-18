@@ -32,6 +32,8 @@ build = {
     ['apicast-cli.configuration'] = "src/apicast-cli/configuration.lua",
     ['apicast-cli.application'] = "src/apicast-cli/application.lua",
     ['apicast-cli.utils.exec'] = "src/apicast-cli/utils/exec.lua",
+    ['apicast-cli.template'] = "src/apicast-cli/template.lua",
+    ['apicast-cli.project'] = "src/apicast-cli/project.lua",
   },
   install = {
     lua = {
@@ -39,6 +41,7 @@ build = {
       ['apicast-cli.blank-app.nginx.main'] = "src/apicast-cli/blank-app/nginx/main.conf.liquid",
       ['apicast-cli.blank-app.config.production'] = "src/apicast-cli/blank-app/config/production.lua",
       ['apicast-cli.blank-app.config.development'] = "src/apicast-cli/blank-app/config/development.lua",
+      ['apicast-cli.blank-app.src.blank-app.init'] = "src/apicast-cli/blank-app/src/blank-app/init.lua",
     },
     bin = {
       ['apicast-cli'] = "bin/apicast-cli",

@@ -1,14 +1,14 @@
-{% include "env.conf" %}
+{% raw %}{% include "env.conf" %}{% endraw %}
 
-daemon {{ daemon }};
-master_process {{ master_process }};
-worker_processes {{ worker_processes }};
+daemon {% raw %}{{ daemon }}{% endraw %};
+master_process {% raw %}{{ master_process }}{% endraw %};
+worker_processes {% raw %}{{ worker_processes }}{% endraw %};
 
 events {
   worker_connections 1024;
 }
 
 http {
-  lua_code_cache {{ lua_code_cache }};
+  lua_code_cache {% raw %}{{ lua_code_cache }}{% endraw %};
 
 }

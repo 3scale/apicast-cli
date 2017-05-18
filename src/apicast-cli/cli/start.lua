@@ -8,11 +8,7 @@ local pl = {
   file = require('pl.file'),
 }
 
-local Lexer = Liquid.Lexer
-local Parser = Liquid.Parser
-local Interpreter = Liquid.Interpreter
-local Lazy = Liquid.Lazy
-local InterpreterContext = Liquid.InterpreterContext
+local Template = require('apicast-cli.template')
 
 local lfs = require('lfs')
 
@@ -59,37 +55,20 @@ end
 local _M = { }
 local mt = { __call = call }
 
-local function render(template, config)
-  local filesystem = setmetatable({}, {
-    __index = function(t, k)
-      local dirs = {}
-      for dir in lfs.dir(k) do
-        if dir ~= '.' and dir ~= '..' then
-          table.insert(dirs, k .. '/' .. dir)
-        end
-      end
-      return dirs
-    end
-  })
-  local fs = Lazy:new(filesystem, {})
-  local lexer = Lexer:new(template)
-  local parser = Parser:new(lexer)
-  local interpreter = Interpreter:new(parser)
-  local context = InterpreterContext:new(setmetatable({ fs = fs }, { __index = config }))
-
-  return interpreter:interpret(context)
-end
 
 function _M.start(args)
   local path = args.path
   local attributes = lfs.attributes(path)
   local context = configuration:load()
+  local template = Template:new(context)
 
   if attributes then
     local mode = attributes.mode
 
     if mode == 'file' then
-      local config = render(read(path), context)
+
+      local config = template:render(path)
+
       local tmp = pl.path.tmpname()
 
       pl.file.write(tmp, config)
