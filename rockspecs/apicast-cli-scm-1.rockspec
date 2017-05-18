@@ -16,7 +16,6 @@ dependencies = {
   "argparse",
   "ansicolors",
   "penlight",
-  "luafilesystem",
   "liquid",
   "debugger",
 }
