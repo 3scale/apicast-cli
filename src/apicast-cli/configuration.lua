@@ -9,6 +9,8 @@ local _M = {
     worker_processes = 1,
     daemon = 'off',
     port = 8080,
+    lua_path = '',
+    lua_cpath = '',
   }
 }
 
@@ -28,7 +30,11 @@ function _M:load(env)
 
   print('loading config for: ', environment, ' environment from ', path)
 
-  local config = loadfile(path, 't', {})
+  local config = loadfile(path, 't', {
+    print = print, inspect = require('inspect'),
+    pcall = pcall, require = require, assert = assert, error = error,
+  })
+
   local default_config = self.default_config
 
   if not config then
