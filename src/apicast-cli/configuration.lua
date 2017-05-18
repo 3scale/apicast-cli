@@ -8,6 +8,7 @@ local _M = {
     master_process = 'off',
     worker_processes = 1,
     daemon = 'off',
+    port = 8080,
   }
 }
 
