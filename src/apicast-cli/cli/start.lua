@@ -39,6 +39,13 @@ function Liquid.FileSystem.get(location)
   return read(location) or ''
 end
 
+local _M = {
+  openresty = { 'openresty-debug', 'openresty', 'nginx' },
+  log_levels = { 'emerg', 'alert', 'crit', 'error', 'warn', 'notice', 'info', 'debug' },
+  log_level = 5, -- warn
+  log_file = 'stderr',
+}
+
 local function call(m, parser)
   local start_cmd = parser:command("s start", "Start Nginx")
   :action(m.start)
@@ -47,16 +54,16 @@ local function call(m, parser)
   start_cmd:argument("path", "The name of your application.", 'nginx/main.conf.liquid')
   start_cmd:flag("-t --test", "Test the nginx config")
   start_cmd:flag("-d --debug", "Debug mode. Prints more information.")
-  -- create_cmd:argument("path", "The path to where you wish your app to be created."):default(".")
+  start_cmd:flag('-v --verbose', "Increase logging verbosity."):count(("0-%s"):format(#(_M.log_levels) - _M.log_level))
+  start_cmd:flag('-q --quiet', "Decrease logging verbosity."):count(("0-%s"):format(_M.log_level - 1))
+
   start_cmd:epilog(colors([[
       Example: %{bright red} apicast-cli start path/to/template.liquid%{reset}
         This will create start nginx using tempalte path/to/template.liquid.]]))
   return start_cmd
 end
 
-local _M = { openresty = { 'openresty-debug', 'openresty', 'nginx' } }
 local mt = { __call = call }
-
 
 local function pick_openesty(candidates)
   for i=1, #candidates do
@@ -88,13 +95,19 @@ function _M.start(args)
 
       pl.file.write(tmp, config)
 
-      local arg = { '-c', tmp }
+      local log_level = _M.log_levels[_M.log_level + args.verbose - args.quiet]
+      local log_file = args.log or _M.log_file
+      local global = {
+        ('error_log %s %s'):format(log_file, log_level)
+      }
+
+      local cmd = { '-c', tmp, '-g', table.concat(global, '; ') .. ';' }
 
       if args.test then
-        table.insert(arg, args.debug and '-T' or '-t')
+        table.insert(cmd, args.debug and '-T' or '-t')
       end
 
-      exec(openresty, arg)
+      exec(openresty, cmd)
     else
       say('path %s is not a file but a %s', path, mode)
       os.exit(1)
