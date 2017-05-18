@@ -11,4 +11,32 @@ events {
 http {
   lua_code_cache {% raw %}{{ lua_code_cache }}{% endraw %};
 
+  lua_package_path {% raw %}"{{ lua_path }};;";{% endraw %}
+  lua_package_cpath {% raw %}"{{ lua_cpath }};;";{% endraw %}
+
+  init_by_lua_block {
+    -- code to be executed before forking workers
+  }
+
+  init_worker_by_lua_block {
+    -- code to be executed after forking workers
+  }
+
+  log_by_lua_block {
+    -- custom logging
+  }
+
+  server {
+    listen {% raw %}{{ port }} default_server{% endraw %};
+
+    locaton / {
+      access_by_lua_block {
+        -- verify the request
+      }
+
+      content_by_lua_block {
+        -- generate some response
+      }
+    }
+  }
 }

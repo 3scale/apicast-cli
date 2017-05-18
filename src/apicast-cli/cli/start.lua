@@ -22,6 +22,8 @@ local function call(m, parser)
 
   start_cmd:usage(colors("%{bright red}Usage: apicast-cli start [PATH]"))
   start_cmd:argument("path", "The name of your application.", 'nginx/main.conf.liquid')
+
+  start_cmd:option('-e --environment', "Environment to start.", 'production')
   start_cmd:flag("-t --test", "Test the nginx config")
   start_cmd:flag("-d --debug", "Debug mode. Prints more information.")
   start_cmd:flag('-v --verbose', "Increase logging verbosity."):count(("0-%s"):format(#(_M.log_levels) - _M.log_level))
@@ -51,7 +53,7 @@ function _M.start(args)
   local openresty = pick_openesty(_M.openresty)
   local dir = pl.path.dirname(args.path)
   local path = pl.path.basename(args.path)
-  local context = configuration:load()
+  local context = configuration:load(args.environment)
   local template = Template:new(context, dir, true)
 
   local config = template:render(path)
