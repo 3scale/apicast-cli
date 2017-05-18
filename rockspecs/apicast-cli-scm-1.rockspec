@@ -27,14 +27,18 @@ build = {
     ['apicast-cli.cli'] = "src/apicast-cli/cli.lua",
     ['apicast-cli.cmd.generator'] = "src/apicast-cli/cmd/generator.lua",
     ['apicast-cli.utils.path'] = "src/apicast-cli/utils/path.lua",
-    ['apicast-cli.cli.create'] = "src/apicast-cli/cli/create.lua"
+    ['apicast-cli.cli.create'] = "src/apicast-cli/cli/create.lua",
+    ['apicast-cli.cli.start'] = "src/apicast-cli/cli/start.lua",
+    ['apicast-cli.configuration'] = "src/apicast-cli/configuration.lua",
+    ['apicast-cli.application'] = "src/apicast-cli/application.lua",
+    ['apicast-cli.utils.exec'] = "src/apicast-cli/utils/exec.lua",
   },
   install = {
     lua = {
-      ['apicast-cli.blank-app.readme'] = "src/apicast-cli/blank-app/README.md"
+      ['apicast-cli.blank-app.readme'] = "src/apicast-cli/blank-app/README.md",
     },
     bin = {
-      ['apicast-cli'] = "bin/apicast-cli"
+      ['apicast-cli'] = "bin/apicast-cli",
     }
   }
 }
