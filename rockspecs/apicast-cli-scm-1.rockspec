@@ -36,7 +36,7 @@ build = {
   install = {
     lua = {
       ['apicast-cli.blank-app.readme'] = "src/apicast-cli/blank-app/README.md",
-      ['apicast-cli.blank-app.nginx.main.conf'] = "src/apicast-cli/blank-app/nginx/main.conf.liquid",
+      ['apicast-cli.blank-app.nginx.main'] = "src/apicast-cli/blank-app/nginx/main.conf.liquid",
       ['apicast-cli.blank-app.config.production'] = "src/apicast-cli/blank-app/config/production.lua",
       ['apicast-cli.blank-app.config.development'] = "src/apicast-cli/blank-app/config/development.lua",
     },
