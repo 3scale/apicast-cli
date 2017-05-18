@@ -41,6 +41,7 @@ build = {
       ['apicast-cli.blank-app.nginx.main'] = "src/apicast-cli/blank-app/nginx/main.conf.liquid",
       ['apicast-cli.blank-app.config.production'] = "src/apicast-cli/blank-app/config/production.lua",
       ['apicast-cli.blank-app.config.development'] = "src/apicast-cli/blank-app/config/development.lua",
+      ['apicast-cli.blank-app.src.blank-app.init'] = "src/apicast-cli/blank-app/src/blank-app/init.lua",
     },
     bin = {
       ['apicast-cli'] = "bin/apicast-cli",

@@ -2,6 +2,7 @@ local utils_path = require "apicast-cli.utils.path"
 local path = require "pl.path"
 local dir = require "pl.dir"
 local file = require 'pl.file'
+local stringx = require 'pl.stringx'
 
 local Template = require 'apicast-cli.template'
 local project = require 'apicast-cli.project'
@@ -16,7 +17,8 @@ end
 
 local function copy_blank_app(destination, fun)
   local new_app = tostring(destination)
-  local raw_app = project:new(path.join(utils_path.find(), 'apicast-cli/blank-app'))
+  local blank_app = 'blank-app'
+  local raw_app = project:new(path.join(utils_path.find(), 'apicast-cli', blank_app))
   local tmp = tmpname()
 
   local template = Template:new()
@@ -27,7 +29,8 @@ local function copy_blank_app(destination, fun)
 
   local force = true
   local copy_file = function(src, dest)
-    local dst = tmppath(dest)
+    -- replace all occurances of blank-app in the path with the project name
+    local dst = stringx.replace(tmppath(dest), blank_app, destination.name)
     local dirname = path.dirname(dst)
 
     if path.exists(dst) then
