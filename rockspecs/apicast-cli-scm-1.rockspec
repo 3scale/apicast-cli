@@ -33,6 +33,7 @@ build = {
     ['apicast-cli.application'] = "src/apicast-cli/application.lua",
     ['apicast-cli.utils.exec'] = "src/apicast-cli/utils/exec.lua",
     ['apicast-cli.template'] = "src/apicast-cli/template.lua",
+    ['apicast-cli.project'] = "src/apicast-cli/project.lua",
   },
   install = {
     lua = {
