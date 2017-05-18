@@ -43,6 +43,8 @@ build = {
       ['apicast-cli.blank-app.config.production'] = "src/apicast-cli/blank-app/config/production.lua",
       ['apicast-cli.blank-app.config.development'] = "src/apicast-cli/blank-app/config/development.lua",
       ['apicast-cli.blank-app.src.blank-app.init'] = "src/apicast-cli/blank-app/src/blank-app/init.lua",
+      ['apicast-cli.blank-app.s2i.bin.run'] = "src/apicast-cli/blank-app/.s2i/bin/run",
+      ['apicast-cli.blank-app.s2i.environment'] = "src/apicast-cli/blank-app/.s2i/environment",
     },
     bin = {
       ['apicast-cli'] = "bin/apicast-cli",
