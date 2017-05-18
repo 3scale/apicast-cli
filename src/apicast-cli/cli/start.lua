@@ -40,16 +40,18 @@ function Liquid.FileSystem.get(location)
 end
 
 local function call(m, parser)
-  local create_cmd = parser:command("s start", "Start Nginx")
+  local start_cmd = parser:command("s start", "Start Nginx")
   :action(m.start)
 
-  create_cmd:usage(colors("%{bright red}Usage: apicast-cli start [PATH]"))
-  create_cmd:argument("path", "The name of your application.", 'nginx/main.conf.liquid')
+  start_cmd:usage(colors("%{bright red}Usage: apicast-cli start [PATH]"))
+  start_cmd:argument("path", "The name of your application.", 'nginx/main.conf.liquid')
+  start_cmd:flag("-t --test", "Test the nginx config")
+  start_cmd:flag("-d --debug", "Debug mode. Prints more information.")
   -- create_cmd:argument("path", "The path to where you wish your app to be created."):default(".")
-  create_cmd:epilog(colors([[
+  start_cmd:epilog(colors([[
       Example: %{bright red} apicast-cli start path/to/template.liquid%{reset}
         This will create start nginx using tempalte path/to/template.liquid.]]))
-  return create_cmd
+  return start_cmd
 end
 
 local _M = { }
@@ -73,7 +75,13 @@ function _M.start(args)
 
       pl.file.write(tmp, config)
 
-      exec('openresty', '-c', tmp)
+      local arg = { '-c', tmp }
+
+      if args.test then
+        table.insert(arg, args.debug and '-T' or '-t')
+      end
+
+      exec('openresty', arg)
     else
       say('path %s is not a file but a %s', path, mode)
       os.exit(1)
