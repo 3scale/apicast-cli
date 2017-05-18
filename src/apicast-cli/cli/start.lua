@@ -54,11 +54,24 @@ local function call(m, parser)
   return start_cmd
 end
 
-local _M = { }
+local _M = { openresty = { 'openresty-debug', 'openresty', 'nginx' } }
 local mt = { __call = call }
 
 
+local function pick_openesty(candidates)
+  for i=1, #candidates do
+    local ok = os.execute(('%s -V 2>/dev/null'):format(candidates[i]))
+
+    if ok then
+      return candidates[i]
+    end
+  end
+
+  error("could not find openresty executable")
+end
+
 function _M.start(args)
+  local openresty = pick_openesty(_M.openresty)
   local path = args.path
   local attributes = lfs.attributes(path)
   local context = configuration:load()
@@ -81,7 +94,7 @@ function _M.start(args)
         table.insert(arg, args.debug and '-T' or '-t')
       end
 
-      exec('openresty', arg)
+      exec(openresty, arg)
     else
       say('path %s is not a file but a %s', path, mode)
       os.exit(1)
