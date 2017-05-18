@@ -3,6 +3,7 @@ local path = require "pl.path"
 local dir = require "pl.dir"
 local file = require 'pl.file'
 local stringx = require 'pl.stringx'
+local rockspec = require 'apicast-cli.rockspec'
 
 local Template = require 'apicast-cli.template'
 local project = require 'apicast-cli.project'
@@ -80,6 +81,8 @@ local create_new_project = function (args, _)
       print('ok ', path)
     end
   end)
+  print('Generating rockspec for new project')
+  rockspec.generate({name = name, dest = new_app.root, version = "scm", revision = "1"})
 
   print('done!')
   os.exit(0)
