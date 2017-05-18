@@ -49,12 +49,9 @@ local rockspec = function(flags)
       modules = {
         [package .. ".config.development"] = "config/development.lua",
         [package .. ".config.production"] = "config/production.lua",
-        [package .. ".init"] = "init.lua",
+        [package .. ".init"] = "src/" .. package .. "/init.lua",
       },
       install = {
-        lua = {
-          [package .. ".init"] = "init.lua"
-        },
       },
     },
   }
