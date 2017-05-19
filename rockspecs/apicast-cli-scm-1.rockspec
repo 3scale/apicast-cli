@@ -14,10 +14,10 @@ description = {
 dependencies = {
   "argparse",
   "ansicolors",
-  "penlight-ffi",
+  "penlight",
   "liquid",
   "debugger",
-  "busted-ffi",
+  "busted",
   "inspect",
 }
 build = {
@@ -49,6 +49,7 @@ build = {
       ['apicast-cli.blank-app.s2i.bin.run'] = "src/apicast-cli/blank-app/.s2i/bin/run",
       ['apicast-cli.blank-app.s2i.environment'] = "src/apicast-cli/blank-app/.s2i/environment",
       ['apicast-cli.blank-app.bustedrc'] = "src/apicast-cli/blank-app/.busted",
+      ['apicast-cli.blank-app.Makefile'] = "src/apicast-cli/blank-app/Makefile",
       ['apicast-cli.blank-app.spec.blank-app_spec'] = "src/apicast-cli/blank-app/spec/blank-app_spec.lua",
     },
     bin = {

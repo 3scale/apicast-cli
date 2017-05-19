@@ -28,7 +28,9 @@ local function copy_blank_app(destination, fun)
   local tmp = tmpname()
 
   local template = Template:new({
-    project = destination.name,
+    path = destination.name,
+    project = stringx.replace(destination.name, '-', '_'),
+    s2i = { builder_image = 'quay.io/3scale/s2i-openresty-centos7:1.11.2.3-4' }
   })
 
   local function tmppath(dest)
