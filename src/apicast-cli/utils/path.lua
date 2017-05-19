@@ -1,6 +1,5 @@
 local path = require "pl.path"
 local loader = require "luarocks.loader"
-local binding = require "resty.repl"
 
 local find_rock_directory = function()
   local file_path = loader.which("apicast-cli.utils.path")

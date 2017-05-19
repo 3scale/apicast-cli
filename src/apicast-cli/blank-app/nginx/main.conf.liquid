@@ -29,7 +29,7 @@ http {
   server {
     listen {% raw %}{{ port }} default_server{% endraw %};
 
-    locaton / {
+    location / {
       access_by_lua_block {
         -- verify the request
       }
