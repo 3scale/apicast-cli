@@ -14,10 +14,10 @@ description = {
 dependencies = {
   "argparse",
   "ansicolors",
-  "penlight-ffi",
+  "penlight",
   "liquid",
   "debugger",
-  "busted-ffi",
+  "busted",
   "inspect",
 }
 build = {
