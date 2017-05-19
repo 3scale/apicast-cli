@@ -26,6 +26,7 @@ local function call(m, parser)
   start_cmd:option('-e --environment', "Environment to start.", 'production')
   start_cmd:flag("-t --test", "Test the nginx config")
   start_cmd:flag("-d --debug", "Debug mode. Prints more information.")
+  start_cmd:flag("-D --daemon", "Daemonize.")
   start_cmd:flag('-v --verbose', "Increase logging verbosity."):count(("0-%s"):format(#(_M.log_levels) - _M.log_level))
   start_cmd:flag('-q --quiet', "Decrease logging verbosity."):count(("0-%s"):format(_M.log_level - 1))
 
@@ -54,6 +55,11 @@ function _M.start(args)
   local dir = pl.path.dirname(args.path)
   local path = pl.path.basename(args.path)
   local context = configuration:load(args.environment)
+
+  if args.daemon then
+    context.daemon = 'on'
+  end
+
   local template = Template:new(context, dir, true)
 
   local config = template:render(path)
