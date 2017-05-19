@@ -1,8 +1,8 @@
 test: build
-	docker run --rm cors-proxy-app
+	docker run --rm {{ path }}-app /usr/libexec/s2i/run --daemon
 
 build: rock
-	s2i build . quay.io/3scale/s2i-openresty-centos7:1.11.2.3-4 cors-proxy-app
+	s2i build . {{s2i.builder_image }} {{ path }}-app
 
 rock:
-	luarocks make cors-proxy-scm-1.rockspec
+	luarocks make {{ path }}-scm-1.rockspec
