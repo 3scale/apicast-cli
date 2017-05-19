@@ -28,7 +28,8 @@ local function copy_blank_app(destination, fun)
   local tmp = tmpname()
 
   local template = Template:new({
-    project = destination.name,
+    path = destination.name,
+    project = stringx.replace(destination.name, '-', '_')
   })
 
   local function tmppath(dest)

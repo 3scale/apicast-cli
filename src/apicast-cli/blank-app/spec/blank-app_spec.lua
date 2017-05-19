@@ -1,4 +1,4 @@
-local {{ project }} = require("{{project}}")
+local {{ project }} = require("{{path}}")
 
 describe('double-spec', function()
 
