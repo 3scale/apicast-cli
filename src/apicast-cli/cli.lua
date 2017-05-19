@@ -7,10 +7,11 @@ local parser = argparse("script", colors("%{bright blue}Apicast command line uti
 
 local create_cmd = require('apicast-cli.cli.create')
 local start_cmd = require('apicast-cli.cli.start')
+local busted_cmd = require('apicast-cli.cli.busted')
 
 local _M = {
   parser = parser,
-  actions = { create_cmd, start_cmd }
+  actions = { create_cmd, start_cmd, busted_cmd }
 }
 
 function _M:call()

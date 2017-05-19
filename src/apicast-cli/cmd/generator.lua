@@ -16,6 +16,11 @@ local function tmpname()
   return tmp
 end
 
+local transformations = {
+  ['/s2i/'] = '/.s2i/',
+  ['/bustedrc'] = '/.busted',
+}
+
 local function copy_blank_app(destination, fun)
   local new_app = tostring(destination)
   local blank_app = 'blank-app'
@@ -34,7 +39,11 @@ local function copy_blank_app(destination, fun)
   local copy_file = function(src, dest)
     -- replace all occurances of blank-app in the path with the project name
     local dst = stringx.replace(tmppath(dest), blank_app, destination.name)
-    dst = stringx.replace(dst, '/s2i/', '/.s2i/')
+
+    for s,r in pairs(transformations) do
+      dst = stringx.replace(dst, s, r)
+    end
+
     local dirname = path.dirname(dst)
 
     if path.exists(dst) then
