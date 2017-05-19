@@ -17,6 +17,7 @@ dependencies = {
   "penlight-ffi",
   "liquid",
   "debugger",
+  "inspect",
 }
 build = {
   type = "builtin",
