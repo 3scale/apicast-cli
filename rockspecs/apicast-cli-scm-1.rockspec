@@ -51,6 +51,7 @@ build = {
       ['apicast-cli.blank-app.bustedrc'] = "src/apicast-cli/blank-app/.busted",
       ['apicast-cli.blank-app.Makefile'] = "src/apicast-cli/blank-app/Makefile",
       ['apicast-cli.blank-app.spec.blank-app_spec'] = "src/apicast-cli/blank-app/spec/blank-app_spec.lua",
+      ['apicast-cli.blank-app.circleci.config'] = "src/apicast-cli/blank-app/.circleci/config.yml",
     },
     bin = {
       ['apicast-cli'] = "bin/apicast-cli",
