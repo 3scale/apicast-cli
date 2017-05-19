@@ -27,7 +27,9 @@ local function copy_blank_app(destination, fun)
   local raw_app = project:new(path.join(utils_path.find(), 'apicast-cli', blank_app))
   local tmp = tmpname()
 
-  local template = Template:new()
+  local template = Template:new({
+    project = destination.name,
+  })
 
   local function tmppath(dest)
     return path.join(new_app, path.relpath('/' .. path.relpath(dest, tmp), tostring(raw_app)))

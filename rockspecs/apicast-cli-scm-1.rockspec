@@ -12,13 +12,13 @@ description = {
   license = "Apache License 2.0"
 }
 dependencies = {
-  "lua >= 5.1, < 5.3",
   "argparse",
   "ansicolors",
-  "penlight",
+  "penlight-ffi",
   "liquid",
   "debugger",
   "busted",
+  "inspect",
 }
 build = {
   type = "builtin",
