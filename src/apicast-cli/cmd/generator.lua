@@ -19,6 +19,7 @@ end
 local transformations = {
   ['/s2i/'] = '/.s2i/',
   ['/bustedrc'] = '/.busted',
+  ['/circleci/'] = '/.circleci/',
 }
 
 local function copy_blank_app(destination, fun)

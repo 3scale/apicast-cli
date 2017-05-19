@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: {{s2i.builder_image}}
+        environment:
+          TEST_NGINX_BINARY: openresty
+    working_directory: /opt/app-root/{{project}}
+    steps:
+      - checkout
+      - run: luarocks make *.rockspec
+      - run: /usr/local/openresty/luajit/bin/apicast-cli busted
