@@ -10,7 +10,8 @@ local run_tests = function ()
     args[i-1] = arg[i]
   end
 
-  exec(busted_wrapper, args)
+  table.insert(args, 1, busted_wrapper)
+  exec('resty', args)
 end
 
 return {

@@ -37,6 +37,7 @@ build = {
     ['apicast-cli.template'] = "src/apicast-cli/template.lua",
     ['apicast-cli.project'] = "src/apicast-cli/project.lua",
     ['apicast-cli.rockspec'] = "src/apicast-cli/rockspec.lua",
+    ['apicast-cli.busted_wrapper'] = "src/apicast-cli/busted_wrapper.lua",
   },
   install = {
     lua = {
