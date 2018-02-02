@@ -26,7 +26,7 @@ function _M:load(env)
   local application = self.application
   local root = application.root
   local name = ("%s.lua"):format(environment)
-  local path = pl_path.join(root, 'config', name)
+  local path = pl_path.isfile(environment) and environment or pl_path.join(root, 'config', name)
 
   print('loading config for: ', environment, ' environment from ', path)
 
